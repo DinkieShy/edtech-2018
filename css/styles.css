@@ -17,3 +17,12 @@
 #bottomTab{
 
 }
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  overflow: hidden;
+}
