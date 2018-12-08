@@ -7,11 +7,56 @@
 }
 
 #topTab{
+  position: absolute;
+  width: 100vw;
+  height: 90vh;
+  background-color: white;
+  border-bottom-style: solid;
+  border-color: #b0b0b0;
 
+  top:-90.3vh;
+}
+
+#topTabButton{
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  border-width: 5px;
+  position: absolute;
+  text-align: center;
+  padding-top: 25px;
+  background-color: white;
+  border-color: #b0b0b0;
+  border-bottom-style: solid;
+  box-sizing: border-box;
+  display: block;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -50%);
+}
+
+#topTabButton:hover{
+  transform: translate(-50%, -30%);
 }
 
 #rightTab{
 
+}
+
+#dropzone{
+  position: absolute;
+  display: block;
+  left: 70%;
+  top: 0%;
+  z-index: -1;
+  width: 30%;
+  height: 10%;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: green;
+  background-color: #e3ffe3;
+  border-width: 5px;
+  box-sizing: border-box;
 }
 
 #bottomTab{

@@ -1,10 +1,18 @@
+var canvasStateObj;
+var finalCanvasObj;
+
 $(function(){
   console.log("init");
   var canvas = $('#individualWorkspace')[0];
   canvas.height = window.innerHeight;
   canvas.width = window.innerWidth;
-  var canvasStateObj = new canvasState(canvas);
+  canvasStateObj = new canvasState(canvas);
   var bottomTabButton = new tabButton("bottom", $('#bottomTabButton')[0], $('#bottomTab')[0]);
+  var finalCanvas = $('#finalWorkspace')[0];
+  finalCanvas.height = 0.92*window.innerHeight;
+  finalCanvas.width = window.innerWidth;
+  var topTabButton = new tabButton("top", $('#topTabButton')[0], $('#topTab')[0]);
+  finalCanvasObj = new canvasState(finalCanvas);
 });
 
 function tabButton(direction, button, tab){
@@ -90,7 +98,7 @@ Shape.prototype.draw = function(ctx){
     }
     ctx.font = this.fontSize + "px " + this.font;
     ctx.fillStyle = this.fontColour;
-    ctx.fillText(this.text, this.x, this.y+this.h);
+    ctx.fillText(this.text, this.x, this.y+this.h-5);
   }
   else if(this.shapeStyle == "rectangle"){
     ctx.fillStyle = this.fill;
@@ -163,6 +171,12 @@ function canvasState(canvas){
 
   canvas.addEventListener('mouseup', function(e){
     state.dragging = false;
+    var mouse = state.getMouse(e);
+    if(mouse.x > 0.7*window.innerWidth && mouse.y < 0.1*window.innerHeight && canvas.id == "individualWorkspace"){
+      var toMove = state.selection;
+      state.purge();
+      finalCanvasObj.addShape(toMove);
+    }
   }, true);
 
   canvas.addEventListener('dblclick', function(e){

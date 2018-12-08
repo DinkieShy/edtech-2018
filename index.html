@@ -8,8 +8,12 @@
 
 <body>
   <canvas id="individualWorkspace"></canvas>
+  <section id="dropzone"></section>
   <section id="leftTab"></section>
-  <section id="topTab"></section>
+  <section id="topTab">
+    <canvas id="finalWorkspace"></canvas>
+    <a id="topTabButton">\/</a>
+  </section>
   <section id="rightTab"></section><!-- This bit, Sam!-->
   <section id="bottomTab">
     <a id="bottomTabButton">/\</a>
@@ -35,11 +39,11 @@
       </li>
       <li>
         <label>Shape Colour: </label>
-        <form id="shapeColourForm"><input type="color" id="shapeColour" value="#AAAAAA"></form>
+        <form id="shapeColourForm"><input type="color" id="shapeColour" value="#000000"></form>
       </li>
       <li>
         <label>Text Colour: </label>
-        <form id="fontColourForm"><input type="color" id="shapeColour" value="#AAAAAA"></form>
+        <form id="fontColourForm"><input type="color" id="shapeColour" value="#FFFFFF"></form>
       </li>
       <li>
         <label>Font Size: </label>
