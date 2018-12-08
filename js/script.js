@@ -33,7 +33,7 @@ function tabButton(direction, button, tab){
           this.active = false;
         }
         else{
-          tab.style.transform = "translate(0, -100%)";
+          tab.style.transform = "translate(-100%, 0)";
           button.innerHTML = "<-";
           this.active = true;
         }
@@ -45,7 +45,7 @@ function tabButton(direction, button, tab){
           this.active = false;
         }
         else{
-          tab.style.transform = "translate(0, -100%)";
+          tab.style.transform = "translate(100%, 0)";
           button.innerHTML = "->";
           this.active = true;
         }
@@ -57,7 +57,7 @@ function tabButton(direction, button, tab){
           this.active = false;
         }
         else{
-          tab.style.transform = "translate(0, -100%)";
+          tab.style.transform = "translate(0, 100%)";
           button.innerHTML = "/\\";
           this.active = true;
         }
@@ -75,14 +75,25 @@ function Shape(x, y, w, h, fill){
   this.shapeStyle = $('#shapeStyleForm').val();
   this.text = "";
   this.font = "";
-  this.fontSize = 12;
-  this.frontColour = "";
+  this.fontSize = 15;
+  this.fontColour = "";
   this.shapeSize = 20;
 }
 
 Shape.prototype.draw = function(ctx){
-  ctx.fillStyle = this.fill;
-  if(this.shapeStyle == "rectangle"){
+  if(this.text != ""){
+    this.w = ctx.measureText(this.text).width;
+    this.h = this.fontSize;
+    if(this.shapeStyle == "rectangle"){
+      ctx.fillStyle = this.fill;
+      ctx.fillRect(this.x, this.y, this.w, this.h);
+    }
+    ctx.font = this.fontSize + "px " + this.font;
+    ctx.fillStyle = this.fontColour;
+    ctx.fillText(this.text, this.x, this.y+this.h);
+  }
+  else if(this.shapeStyle == "rectangle"){
+    ctx.fillStyle = this.fill;
     ctx.fillRect(this.x, this.y, this.w, this.h);
   }
 }
@@ -108,6 +119,10 @@ function canvasState(canvas){
   this.selection;
   this.dragoffx = 0;
   this.dragoffy = 0;
+
+  $('#purgeButton')[0].addEventListener('click', function(){
+    state.purge();
+  });
 
   var state = this;
 
@@ -157,14 +172,22 @@ function canvasState(canvas){
         this.selection = state.shapes[i];
         this.drawn = false;
         //make text input appear
-        this.selection.font = $('#fontForm')[0].val();
-        this.selection.fontSize = $('#fontSizeForm')[0].val();
-        this.selection.fontColour = $('#fontColourForm')[0].val();
-        //this.selection.text = 
+        this.selection.fill = $('#shapeColourForm')[0][0].value;
+        this.selection.font = $('#fontForm').val();
+        this.selection.fontSize = parseInt($('#fontSizeForm')[0][0].value);
+        this.selection.fontColour = $('#fontColourForm')[0][0].value;
+        this.selection.text = $('#textInput')[0][0].value;
+        console.log(this.selection);
         return;
       }
     }
-    state.addShape(new Shape(mouse.x-10, mouse.y-10, 20, 20, 'rgba(0, 255, 0, 0.6)'));
+    state.addShape(new Shape(mouse.x-parseInt($('#shapeSizeForm')[0][0].value)/2, mouse.y-parseInt($('#shapeSizeForm')[0][0].value)/2, parseInt($('#shapeSizeForm')[0][0].value), parseInt($('#shapeSizeForm')[0][0].value), $('#shapeColourForm')[0][0].value));
+    state.shapes[state.shapes.length-1].fill = $('#shapeColourForm')[0][0].value;
+    state.shapes[state.shapes.length-1].font = $('#fontForm').val();
+    state.shapes[state.shapes.length-1].fontSize = parseInt($('#fontSizeForm')[0][0].value);
+    state.shapes[state.shapes.length-1].fontColour = $('#fontColourForm')[0][0].value;
+    state.shapes[state.shapes.length-1].text = $('#textInput')[0][0].value;
+    this.drawn = false;
   }, true);
 
   this.selectionColour = '#CC0000';
@@ -173,6 +196,19 @@ function canvasState(canvas){
   setInterval(function(){
     state.draw();
   }, state.interval);
+}
+
+canvasState.prototype.purge = function(){
+  console.log(this);
+  for(var i = 0; i < this.shapes.length; i++){
+    console.log("bleh");
+    if(this.shapes[i] == this.selection){
+      this.shapes.splice(i, 1);
+      this.selection = null;
+      this.drawn = false;
+      return;
+    }
+  }
 }
 
 canvasState.prototype.draw = function(){

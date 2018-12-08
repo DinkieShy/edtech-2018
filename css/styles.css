@@ -18,7 +18,7 @@
   position: absolute;
   background-color: #e3e3e3;
   width: 100vw;
-  height: 160px;
+  height: 230px;
   z-index: 1;
 }
 
@@ -72,8 +72,12 @@ form{
   padding: 0;
 }
 
-#textInputForm{
-  width:100%;
+#textInput{
+  width: 100%;
+}
+
+.textInputForm{
+  width: 100%;
 }
 
 label{
