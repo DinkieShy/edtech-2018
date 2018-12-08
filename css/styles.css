@@ -2,10 +2,6 @@
   font-size: 100pt;
 }
 
-#leftTab{
-
-}
-
 #topTab{
   position: absolute;
   width: 100vw;
@@ -122,7 +118,7 @@ form{
 }
 
 .textInputForm{
-  width: 100%;
+  width: 98%;
 }
 
 label{

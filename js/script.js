@@ -34,18 +34,6 @@ function tabButton(direction, button, tab){
           this.active = true;
         }
       break;
-      case "left":
-        if(this.active){
-          tab.style.transform = "";
-          button.innerHTML = "->";
-          this.active = false;
-        }
-        else{
-          tab.style.transform = "translate(-100%, 0)";
-          button.innerHTML = "<-";
-          this.active = true;
-        }
-      break;
       case "right":
         if(this.active){
           tab.style.transform = "";
