@@ -84,6 +84,12 @@ Shape.prototype.draw = function(ctx){
       ctx.fillStyle = this.fill;
       ctx.fillRect(this.x, this.y, this.w, this.h);
     }
+    else if(this.shapeStyle == "ellipse"){
+      ctx.fillStyle = this.fill;
+      ctx.beginPath();
+      ctx.ellipse(this.x+this.w/2, this.y+this.h/2, this.w, this.h, 0, 2*Math.PI , 0, true);
+      ctx.fill();
+    }
     ctx.font = this.fontSize + "px " + this.font;
     ctx.fillStyle = this.fontColour;
     ctx.fillText(this.text, this.x, this.y+this.h-5);
@@ -91,6 +97,12 @@ Shape.prototype.draw = function(ctx){
   else if(this.shapeStyle == "rectangle"){
     ctx.fillStyle = this.fill;
     ctx.fillRect(this.x, this.y, this.w, this.h);
+  }
+  else if(this.shapeStyle == "ellipse"){
+    ctx.fillStyle = this.fill;
+    ctx.beginPath();
+    ctx.ellipse(this.x+this.w/2, this.y+this.h/2, this.w, this.h, 0, 2*Math.PI , 0, true);
+    ctx.fill();
   }
 }
 
@@ -183,13 +195,15 @@ function canvasState(canvas){
         return;
       }
     }
-    state.addShape(new Shape(mouse.x-parseInt($('#shapeSizeForm')[0][0].value)/2, mouse.y-parseInt($('#shapeSizeForm')[0][0].value)/2, parseInt($('#shapeSizeForm')[0][0].value), parseInt($('#shapeSizeForm')[0][0].value), $('#shapeColourForm')[0][0].value));
-    state.shapes[state.shapes.length-1].fill = $('#shapeColourForm')[0][0].value;
-    state.shapes[state.shapes.length-1].font = $('#fontForm').val();
-    state.shapes[state.shapes.length-1].fontSize = parseInt($('#fontSizeForm')[0][0].value);
-    state.shapes[state.shapes.length-1].fontColour = $('#fontColourForm')[0][0].value;
-    state.shapes[state.shapes.length-1].text = $('#textInput')[0][0].value;
-    this.drawn = false;
+    if(canvas.id == "individualWorkspace"){
+      state.addShape(new Shape(mouse.x-parseInt($('#shapeSizeForm')[0][0].value)/2, mouse.y-parseInt($('#shapeSizeForm')[0][0].value)/2, parseInt($('#shapeSizeForm')[0][0].value), parseInt($('#shapeSizeForm')[0][0].value), $('#shapeColourForm')[0][0].value));
+      state.shapes[state.shapes.length-1].fill = $('#shapeColourForm')[0][0].value;
+      state.shapes[state.shapes.length-1].font = $('#fontForm').val();
+      state.shapes[state.shapes.length-1].fontSize = parseInt($('#fontSizeForm')[0][0].value);
+      state.shapes[state.shapes.length-1].fontColour = $('#fontColourForm')[0][0].value;
+      state.shapes[state.shapes.length-1].text = $('#textInput')[0][0].value;
+      this.drawn = false;
+    }
   }, true);
 
   this.selectionColour = '#CC0000';
@@ -231,7 +245,14 @@ canvasState.prototype.draw = function(){
       ctx.strokeStyle = this.selectionColour;
       ctx.lineWidth = this.selectionWidth;
       var sel = this.selection;
-      ctx.strokeRect(sel.x, sel.y, sel.w, sel.h);
+      if(sel.shapeStyle == "rectangle" || sel.shapeStyle == "none"){
+        ctx.strokeRect(sel.x, sel.y, sel.w, sel.h);
+      }
+      else if(sel.shapeStyle == "ellipse"){
+        ctx.beginPath();
+        ctx.ellipse(sel.x+sel.w/2, sel.y+sel.h/2, sel.w, sel.h, 0, 2*Math.PI , 0, true);
+        ctx.stroke();
+      }
     }
 
     this.drawn = true;
