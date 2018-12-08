@@ -4,7 +4,67 @@ $(function(){
   canvas.height = window.innerHeight;
   canvas.width = window.innerWidth;
   var canvasStateObj = new canvasState(canvas);
+  var bottomTabButton = new tabButton("bottom", $('#bottomTabButton')[0], $('#bottomTab')[0]);
 });
+
+function tabButton(direction, button, tab){
+  this.button = button;
+  this.tab = tab;
+  this.direction = direction;
+  this.active = false;
+  button.addEventListener('click', function(){
+    switch(direction){
+      case "bottom":
+        if(this.active){
+          tab.style.transform = "";
+          button.innerHTML = "/\\";
+          this.active = false;
+        }
+        else{
+          tab.style.transform = "translate(0, -100%)";
+          button.innerHTML = "\\/";
+          this.active = true;
+        }
+      break;
+      case "left":
+        if(this.active){
+          tab.style.transform = "";
+          button.innerHTML = "->";
+          this.active = false;
+        }
+        else{
+          tab.style.transform = "translate(0, -100%)";
+          button.innerHTML = "<-";
+          this.active = true;
+        }
+      break;
+      case "right":
+        if(this.active){
+          tab.style.transform = "";
+          button.innerHTML = "<-";
+          this.active = false;
+        }
+        else{
+          tab.style.transform = "translate(0, -100%)";
+          button.innerHTML = "->";
+          this.active = true;
+        }
+      break;
+      case "top":
+        if(this.active){
+          tab.style.transform = "";
+          button.innerHTML = "\\/";
+          this.active = false;
+        }
+        else{
+          tab.style.transform = "translate(0, -100%)";
+          button.innerHTML = "/\\";
+          this.active = true;
+        }
+      break;
+    }
+  });
+}
 
 function Shape(x, y, w, h, fill){
   this.x = x || 0;
@@ -12,8 +72,12 @@ function Shape(x, y, w, h, fill){
   this.w = w || 1;
   this.h = h || 1;
   this.fill = fill || '#AAAAAA';
-  this.shapeStyle = "rectangle";
+  this.shapeStyle = $('#shapeStyleForm').val();
   this.text = "";
+  this.font = "";
+  this.fontSize = 12;
+  this.frontColour = "";
+  this.shapeSize = 20;
 }
 
 Shape.prototype.draw = function(ctx){
@@ -93,6 +157,10 @@ function canvasState(canvas){
         this.selection = state.shapes[i];
         this.drawn = false;
         //make text input appear
+        this.selection.font = $('#fontForm')[0].val();
+        this.selection.fontSize = $('#fontSizeForm')[0].val();
+        this.selection.fontColour = $('#fontColourForm')[0].val();
+        //this.selection.text = 
         return;
       }
     }

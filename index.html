@@ -12,6 +12,7 @@
   <section id="topTab"></section>
   <section id="rightTab"></section><!-- This bit, Sam!-->
   <section id="bottomTab">
+    <a id="bottomTabButton">/\</a>
     <ul>
       <li>
         <label>Shape: </label>
@@ -28,10 +29,6 @@
           <option value="Times New Roman">Times New Roman</option>
           <option value="Verdana">Verdana</option>
         </select>
-      </li>
-      <li>B</li>
-      <li>I</li>
-      <li>U</li>
       <li>
         <label>Shape Size: </label>
         <form id="shapeSizeForm"><input type="range" min=20 max=250 value=20></form>
@@ -42,11 +39,15 @@
       </li>
       <li>
         <label>Text Colour: </label>
-        <form id="textColourForm"><input type="color" id="shapeColour" value="#AAAAAA"></form>
+        <form id="fontColourForm"><input type="color" id="shapeColour" value="#AAAAAA"></form>
       </li>
       <li>
         <label>Font Size: </label>
         <form id="fontSizeForm"><input type="range" min=11 max=72 value=12></form>
+      </li>
+      <li>
+        <label>Text: </label>
+        <form id="textInputForm"><input type="text"></form>
       </li>
     </ul>
   </section>
