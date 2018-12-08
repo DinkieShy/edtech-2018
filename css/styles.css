@@ -9,7 +9,6 @@
   background-color: white;
   border-bottom-style: solid;
   border-color: #b0b0b0;
-
   top:-90.3vh;
 }
 
@@ -36,7 +35,46 @@
 }
 
 #rightTab{
+  position: absolute;
+  left:100vw;
+  border-left-style: solid;
+  border-color: #b0b0b0;
+  top: 0;
+  height: 100%;
+  width: 40%;
+  background-color: #e3e3e3;
+  vertical-align: middle;
+}
 
+#rightTabButton{
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  border-width: 5px;
+  position: relative;
+  text-align: left;
+  padding-top: 15px;
+  border-color: #b0b0b0;
+  border-left-style: solid;
+  box-sizing: border-box;
+  display: block;
+  left:-30px;
+  top: 50%;
+  background-color: #e3e3e3;
+}
+
+#rightTabButton:hover{
+  transform: translate(-20%, 0);
+}
+
+.video{
+  background-color: red;
+  display:block;
+  width: 80%;
+  height: 20%;
+  margin-top: 12.5%;
+  margin-left: 10%;
+  z-index: 1;
 }
 
 #dropzone{

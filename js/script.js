@@ -12,6 +12,7 @@ $(function(){
   finalCanvas.height = 0.92*window.innerHeight;
   finalCanvas.width = window.innerWidth;
   var topTabButton = new tabButton("top", $('#topTabButton')[0], $('#topTab')[0]);
+  var rightTabButton = new tabButton("right", $('#rightTabButton')[0], $('#rightTab')[0]);
   finalCanvasObj = new canvasState(finalCanvas);
 });
 
@@ -41,7 +42,7 @@ function tabButton(direction, button, tab){
           this.active = false;
         }
         else{
-          tab.style.transform = "translate(100%, 0)";
+          tab.style.transform = "translate(-100%, 0)";
           button.innerHTML = "->";
           this.active = true;
         }
