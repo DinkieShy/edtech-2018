@@ -11,5 +11,43 @@
   <section id="leftTab"></section>
   <section id="topTab"></section>
   <section id="rightTab"></section><!-- This bit, Sam!-->
-  <section id="bottomTab"></section>
+  <section id="bottomTab">
+    <ul>
+      <li>
+        <label>Shape: </label>
+        <select id="shapeStyleForm">
+          <option value="rectangle">Rectangle</option>
+          <option value="elipse">Elipse</option>
+          <option value="none">None</option>
+        </select>
+      </li>
+      <li>
+        <label>Font: </label>
+        <select id="fontForm">
+          <option value="Impact">Impact</option>
+          <option value="Times New Roman">Times New Roman</option>
+          <option value="Verdana">Verdana</option>
+        </select>
+      </li>
+      <li>B</li>
+      <li>I</li>
+      <li>U</li>
+      <li>
+        <label>Shape Size: </label>
+        <form id="shapeSizeForm"><input type="range" min=20 max=250 value=20></form>
+      </li>
+      <li>
+        <label>Shape Colour: </label>
+        <form id="shapeColourForm"><input type="color" id="shapeColour" value="#AAAAAA"></form>
+      </li>
+      <li>
+        <label>Text Colour: </label>
+        <form id="textColourForm"><input type="color" id="shapeColour" value="#AAAAAA"></form>
+      </li>
+      <li>
+        <label>Font Size: </label>
+        <form id="fontSizeForm"><input type="range" min=11 max=72 value=12></form>
+      </li>
+    </ul>
+  </section>
 </body>

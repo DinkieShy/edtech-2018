@@ -15,7 +15,42 @@
 }
 
 #bottomTab{
+  position: absolute;
+  background-color: #e3e3e3;
+  width: 100vw;
+  height: 100vh;
+}
 
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 25px;
+}
+
+li{
+  margin-right: 5px;
+  margin-top: 3px;
+  padding: 3px;
+  display: inline-block;
+  background-color: white;
+  border-color: #b0b0b0;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+  min-height: 25px;
+}
+
+label{
+  position: relative;
+  float: left;
+  height: 20px;
+}
+
+input{
+  position: relative;
+  padding: 0;
+  margin: 0;
+  height: 20px;
 }
 
 body{

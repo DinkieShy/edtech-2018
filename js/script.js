@@ -6,16 +6,17 @@ $(function(){
   var canvasStateObj = new canvasState(canvas);
 });
 
-function Shape(x, y, w, h, fill, style) {
+function Shape(x, y, w, h, fill){
   this.x = x || 0;
   this.y = y || 0;
   this.w = w || 1;
   this.h = h || 1;
   this.fill = fill || '#AAAAAA';
-  this.shapeStyle = style;
+  this.shapeStyle = "rectangle";
+  this.text = "";
 }
 
-Shape.prototype.draw = function(ctx) {
+Shape.prototype.draw = function(ctx){
   ctx.fillStyle = this.fill;
   if(this.shapeStyle == "rectangle"){
     ctx.fillRect(this.x, this.y, this.w, this.h);
@@ -51,7 +52,6 @@ function canvasState(canvas){
   }, false);
 
   canvas.addEventListener('mousedown', function(e){
-    console.log("mousedown");
     var mouse = state.getMouse(e);
     var mouseX = mouse.x;
     var mouseY = mouse.y;
@@ -88,7 +88,15 @@ function canvasState(canvas){
 
   canvas.addEventListener('dblclick', function(e){
     var mouse = state.getMouse(e);
-    state.addShape(new Shape(mouse.x-10, mouse.y-10, 20, 20, 'rgba(0, 255, 0, 0.6)', "rectangle"));
+    for(var i = 0; i < state.shapes.length; i++){
+      if(state.shapes[i].contains(mouse.x, mouse.y)){
+        this.selection = state.shapes[i];
+        this.drawn = false;
+        //make text input appear
+        return;
+      }
+    }
+    state.addShape(new Shape(mouse.x-10, mouse.y-10, 20, 20, 'rgba(0, 255, 0, 0.6)'));
   }, true);
 
   this.selectionColour = '#CC0000';
